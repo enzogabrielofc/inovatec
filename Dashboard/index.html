@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Simples</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>📊 Dashboard Simples</h1>
+    <p>Exemplo de resumo com cards e gráficos</p>
+  </header>
+
+  <!-- Cards -->
+  <section class="cards">
+    <div class="card">
+      <h2>1.245</h2>
+      <p>Usuários Registrados</p>
+    </div>
+    <div class="card">
+      <h2>532</h2>
+      <p>Vendas Concluídas</p>
+    </div>
+    <div class="card">
+      <h2>8.912</h2>
+      <p>Visitas no Site</p>
+    </div>
+    <div class="card">
+      <h2>87</h2>
+      <p>Chamados em Aberto</p>
+    </div>
+  </section>
+
+  <!-- Gráficos -->
+  <section class="charts">
+    <div class="chart-box">
+      <canvas id="barChart"></canvas>
+    </div>
+    <div class="chart-box">
+      <canvas id="lineChart"></canvas>
+    </div>
+    <div class="chart-box">
+      <canvas id="pieChart"></canvas>
+    </div>
+  </section>
+
+  <script>
+    // Gráfico de Barras
+    new Chart(document.getElementById('barChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+        datasets: [{
+          label: 'Vendas',
+          data: [120, 190, 300, 250, 200, 320],
+          backgroundColor: '#4a90e2'
+        }]
+      },
+      options: { maintainAspectRatio: false }
+    });
+
+    // Gráfico de Linha
+    new Chart(document.getElementById('lineChart'), {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+        datasets: [{
+          label: 'Visitas',
+          data: [500, 1000, 2000, 3000, 4000, 5000],
+          borderColor: '#50c878',
+          backgroundColor: 'rgba(80,200,120,0.1)',
+          fill: true,
+          tension: 0.3
+        }]
+      },
+      options: { maintainAspectRatio: false }
+    });
+
+    // Gráfico de Pizza
+    new Chart(document.getElementById('pieChart'), {
+      type: 'pie',
+      data: {
+        labels: ['Produto A', 'Produto B', 'Produto C'],
+        datasets: [{
+          data: [300, 200, 100],
+          backgroundColor: ['#4a90e2', '#50c878', '#f39c12']
+        }]
+      },
+      options: { maintainAspectRatio: false }
+    });
+  </script>
+</body>
+</html>

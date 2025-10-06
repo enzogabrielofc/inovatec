@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfólio com IA - Picolé</title>
+  <link rel="stylesheet" href="style_new.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Particles background -->
+  <div id="particles"></div>
+  
+  <!-- Loading screen -->
+  <div id="loading-screen">
+    <div class="loading-content">
+      <div class="loader"></div>
+      <h2>Carregando Portfólio...</h2>
+    </div>
+  </div>
+
+  <header class="hero">
+    <nav class="navbar">
+      <div class="nav-container">
+        <div class="logo">
+          <i class="fas fa-code"></i>
+          <span>Picolé</span>
+        </div>
+        <ul class="nav-menu">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#sobre">Sobre</a></li>
+          <li><a href="#habilidades">Habilidades</a></li>
+          <li><a href="#projetos">Projetos</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+    
+    <div class="hero-content" id="home">
+      <div class="hero-text">
+        <h1>Olá, eu sou <span class="highlight">Picolé</span></h1>
+        <h2 class="typing-text"></h2>
+        <p class="hero-description">Desenvolvedor apaixonado por tecnologia e inteligência artificial. Criando soluções inovadoras e experiências digitais únicas.</p>
+        <div class="hero-buttons">
+          <a href="#projetos" class="btn-primary">
+            <i class="fas fa-rocket"></i>
+            Ver Projetos
+          </a>
+          <a href="#contato" class="btn-secondary">
+            <i class="fas fa-envelope"></i>
+            Contato
+          </a>
+        </div>
+        <div class="social-links">
+          <a href="https://github.com/enzogabrielofc" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="mailto:enzogabrieldomiciano1@gmail.com">
+            <i class="fas fa-envelope"></i>
+          </a>
+          <a href="#">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="#">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="image-container">
+          <div class="floating-elements">
+            <div class="floating-element">💻</div>
+            <div class="floating-element">🚀</div>
+            <div class="floating-element">⚡</div>
+            <div class="floating-element">🎯</div>
+            <div class="floating-element">🔥</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="scroll-indicator">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </header>
+
+  <main>
+    <!-- Sobre Seção -->
+    <section id="sobre" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Sobre Mim</h2>
+          <div class="section-subtitle">
+            <span class="line"></span>
+            <p>Conhecendo o desenvolvedor</p>
+            <span class="line"></span>
+          </div>
+        </div>
+        <div class="about-content">
+          <div class="about-text">
+            <p class="intro">Olá! Sou Picolé, um desenvolvedor apaixonado por criar experiências digitais únicas e inovadoras.</p>
+            <p>Com uma paixão especial por <strong>inteligência artificial</strong> e <strong>tecnologias emergentes</strong>, sempre busco estar na vanguarda do desenvolvimento web. Minha jornada na programação começou com curiosidade e evoluiu para uma verdadeira paixão por resolver problemas complexos.</p>
+            <div class="stats">
+              <div class="stat-item">
+                <div class="stat-number" data-target="4">0</div>
+                <div class="stat-label">Projetos</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number" data-target="2">0</div>
+                <div class="stat-label">Anos de Experiência</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-number" data-target="50">0</div>
+                <div class="stat-label">Commits no GitHub</div>
+              </div>
+            </div>
+          </div>
+          <div class="about-image">
+            <div class="image-wrapper">
+              <div class="code-snippet">
+                <div class="code-header">
+                  <div class="dots">
+                    <span></span><span></span><span></span>
+                  </div>
+                  <span>about.js</span>
+                </div>
+                <div class="code-body">
+                  <span class="comment">// Desenvolvedor em constante evolução</span><br>
+                  <span class="keyword">const</span> <span class="variable">developer</span> = {<br>
+                  &nbsp;&nbsp;<span class="property">name</span>: <span class="string">'Picolé'</span>,<br>
+                  &nbsp;&nbsp;<span class="property">skills</span>: [<span class="string">'JavaScript'</span>, <span class="string">'HTML'</span>, <span class="string">'CSS'</span>],<br>
+                  &nbsp;&nbsp;<span class="property">passion</span>: <span class="string">'Inteligência Artificial'</span>,<br>
+                  &nbsp;&nbsp;<span class="property">mission</span>: <span class="string">'Criar o futuro'</span><br>
+                  };
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Habilidades Seção -->
+    <section id="habilidades" class="section skills-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Minhas Habilidades</h2>
+          <div class="section-subtitle">
+            <span class="line"></span>
+            <p>Tecnologias que domino</p>
+            <span class="line"></span>
+          </div>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3><i class="fas fa-laptop-code"></i> Frontend</h3>
+            <div class="skills-list">
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span>HTML5</span>
+                  <span>90%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="90%"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span>CSS3</span>
+                  <span>85%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="85%"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span>JavaScript</span>
+                  <span>80%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="80%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="skill-category">
+            <h3><i class="fas fa-robot"></i> IA & Tecnologia</h3>
+            <div class="skills-list">
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span>Machine Learning</span>
+                  <span>70%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="70%"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span>APIs & Chatbots</span>
+                  <span>75%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="75%"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-info">
+                  <span>Data Analysis</span>
+                  <span>65%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-width="65%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="skill-category">
+            <h3><i class="fas fa-tools"></i> Ferramentas</h3>
+            <div class="tools-grid">
+              <div class="tool-item"><i class="fab fa-git-alt"></i> Git</div>
+              <div class="tool-item"><i class="fab fa-github"></i> GitHub</div>
+              <div class="tool-item"><i class="fas fa-code"></i> VS Code</div>
+              <div class="tool-item"><i class="fab fa-figma"></i> Figma</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projetos Seção -->
+    <section id="projetos" class="section projects-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Meus Projetos</h2>
+          <div class="section-subtitle">
+            <span class="line"></span>
+            <p>Criações e experimentos</p>
+            <span class="line"></span>
+          </div>
+        </div>
+        <div class="projects-grid">
+          <div class="project-card" data-category="web">
+            <div class="project-image">
+              <div class="project-overlay">
+                <div class="project-links">
+                  <a href="quiz/index.html" class="project-link">
+                    <i class="fas fa-external-link-alt"></i>
+                  </a>
+                  <a href="#" class="project-link">
+                    <i class="fab fa-github"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="project-icon">
+                <i class="fas fa-question-circle"></i>
+              </div>
+            </div>
+            <div class="project-content">
+              <span class="project-category">Web App</span>
+              <h3>Quiz Interativo</h3>
+              <p>Um quiz básico e interativo para testar conhecimentos bíblicos com interface moderna e responsiva.</p>
+              <div class="project-tags">
+                <span class="tag">HTML5</span>
+                <span class="tag">CSS3</span>
+                <span class="tag">JavaScript</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card" data-category="web">
+            <div class="project-image">
+              <div class="project-overlay">
+                <div class="project-links">
+                  <a href="agenda/index.html" class="project-link">
+                    <i class="fas fa-external-link-alt"></i>
+                  </a>
+                  <a href="#" class="project-link">
+                    <i class="fab fa-github"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="project-icon">
+                <i class="fas fa-calendar-alt"></i>
+              </div>
+            </div>
+            <div class="project-content">
+              <span class="project-category">Productivity</span>
+              <h3>Agenda de Eventos</h3>
+              <p>Sistema completo de gerenciamento de eventos e tarefas diárias com interface intuitiva.</p>
+              <div class="project-tags">
+                <span class="tag">JavaScript</span>
+                <span class="tag">LocalStorage</span>
+                <span class="tag">Responsive</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card" data-category="ecommerce">
+            <div class="project-image">
+              <div class="project-overlay">
+                <div class="project-links">
+                  <a href="loja/index.html" class="project-link">
+                    <i class="fas fa-external-link-alt"></i>
+                  </a>
+                  <a href="#" class="project-link">
+                    <i class="fab fa-github"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="project-icon">
+                <i class="fas fa-shopping-cart"></i>
+              </div>
+            </div>
+            <div class="project-content">
+              <span class="project-category">E-commerce</span>
+              <h3>Mini Loja Virtual</h3>
+              <p>Plataforma de vendas online com carrinho de compras, busca avançada e sistema de pagamento.</p>
+              <div class="project-tags">
+                <span class="tag">JavaScript</span>
+                <span class="tag">Cart System</span>
+                <span class="tag">UI/UX</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="project-card" data-category="dashboard">
+            <div class="project-image">
+              <div class="project-overlay">
+                <div class="project-links">
+                  <a href="Dashboard/index.html" class="project-link">
+                    <i class="fas fa-external-link-alt"></i>
+                  </a>
+                  <a href="#" class="project-link">
+                    <i class="fab fa-github"></i>
+                  </a>
+                </div>
+              </div>
+              <div class="project-icon">
+                <i class="fas fa-chart-bar"></i>
+              </div>
+            </div>
+            <div class="project-content">
+              <span class="project-category">Dashboard</span>
+              <h3>Dashboard Analítico</h3>
+              <p>Painel administrativo com gráficos interativos, métricas em tempo real e gerenciamento de conteúdo.</p>
+              <div class="project-tags">
+                <span class="tag">Data Viz</span>
+                <span class="tag">Charts</span>
+                <span class="tag">Admin Panel</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Filtros de Projeto -->
+        <div class="project-filters">
+          <button class="filter-btn active" data-filter="all">Todos</button>
+          <button class="filter-btn" data-filter="web">Web Apps</button>
+          <button class="filter-btn" data-filter="ecommerce">E-commerce</button>
+          <button class="filter-btn" data-filter="dashboard">Dashboards</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contato Seção -->
+    <section id="contato" class="section contact-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Entre em Contato</h2>
+          <div class="section-subtitle">
+            <span class="line"></span>
+            <p>Vamos construir algo incrível juntos</p>
+            <span class="line"></span>
+          </div>
+        </div>
+        <div class="contact-content">
+          <div class="contact-info">
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-envelope"></i>
+              </div>
+              <div class="contact-details">
+                <h3>Email</h3>
+                <p><a href="mailto:enzogabrieldomiciano1@gmail.com">enzogabrieldomiciano1@gmail.com</a></p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fab fa-github"></i>
+              </div>
+              <div class="contact-details">
+                <h3>GitHub</h3>
+                <p><a href="https://github.com/enzogabrielofc" target="_blank">github.com/enzogabrielofc</a></p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <i class="fas fa-phone"></i>
+              </div>
+              <div class="contact-details">
+                <h3>Telefone</h3>
+                <p>Disponível via WhatsApp</p>
+              </div>
+            </div>
+          </div>
+          <div class="contact-form">
+            <form id="contact-form">
+              <div class="form-group">
+                <input type="text" id="name" name="name" placeholder="Seu nome" required>
+                <label for="name">Nome</label>
+              </div>
+              <div class="form-group">
+                <input type="email" id="email" name="email" placeholder="Seu email" required>
+                <label for="email">Email</label>
+              </div>
+              <div class="form-group">
+                <input type="text" id="subject" name="subject" placeholder="Assunto" required>
+                <label for="subject">Assunto</label>
+              </div>
+              <div class="form-group">
+                <textarea id="message" name="message" placeholder="Sua mensagem" rows="5" required></textarea>
+                <label for="message">Mensagem</label>
+              </div>
+              <button type="submit" class="submit-btn">
+                <span>Enviar Mensagem</span>
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Botão flutuante do chat -->
+  <div class="chat-toggle" id="openChat">
+    <i class="fas fa-comments"></i>
+    <div class="chat-notification">1</div>
+  </div>
+
+  <!-- Caixa de chat melhorada -->
+  <div id="chatbox" class="chatbox">
+    <div class="chat-header">
+      <div class="chat-avatar">
+        <i class="fas fa-robot"></i>
+      </div>
+      <div class="chat-info">
+        <h4>IA Assistant</h4>
+        <span class="status online">Online agora</span>
+      </div>
+      <button class="chat-close" id="closeChat">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    <div id="chat-messages" class="chat-messages"></div>
+    <div class="chat-input-container">
+      <input type="text" id="userInput" placeholder="Digite sua pergunta..." autocomplete="off">
+      <button id="sendBtn" class="send-btn">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <div class="footer-logo">
+            <i class="fas fa-code"></i>
+            <span>Picolé</span>
+          </div>
+          <p>Desenvolvedor apaixonado por criar experiências digitais inovadoras e soluções tecnológicas.</p>
+          <div class="footer-social">
+            <a href="https://github.com/enzogabrielofc" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="mailto:enzogabrieldomiciano1@gmail.com">
+              <i class="fas fa-envelope"></i>
+            </a>
+            <a href="#">
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="#">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h4>Navegação</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#sobre">Sobre</a></li>
+            <li><a href="#habilidades">Habilidades</a></li>
+            <li><a href="#projetos">Projetos</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Projetos</h4>
+          <ul>
+            <li><a href="quiz/index.html">Quiz Interativo</a></li>
+            <li><a href="agenda/index.html">Agenda de Eventos</a></li>
+            <li><a href="loja/index.html">Mini Loja Virtual</a></li>
+            <li><a href="Dashboard/index.html">Dashboard</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contato</h4>
+          <ul>
+            <li><i class="fas fa-envelope"></i> enzogabrieldomiciano1@gmail.com</li>
+            <li><i class="fab fa-github"></i> github.com/enzogabrielofc</li>
+            <li><i class="fas fa-phone"></i> Disponível via WhatsApp</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Picolé — Portfólio com IA. Desenvolvido com ❤️ e muita criatividade.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
