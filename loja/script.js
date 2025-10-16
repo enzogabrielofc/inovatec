@@ -129,69 +129,123 @@ function toggleCart() {
     }
 }
 
-// Mostrar feedback ao adicionar produto
-function showAddToCartFeedback(productName) {
-    // Criar elemento de feedback
-    const feedback = document.createElement('div');
-    feedback.style.cssText = `
+// Sistema de Toast Notifications
+function showToast(message, type = 'success', duration = 3000) {
+    const toast = document.createElement('div');
+    
+    const colors = {
+        success: { bg: '#28a745', icon: '✅' },
+        warning: { bg: '#ffc107', icon: '⚠️' },
+        error: { bg: '#dc3545', icon: '❌' },
+        info: { bg: '#17a2b8', icon: 'ℹ️' }
+    };
+    
+    const color = colors[type] || colors.success;
+    
+    toast.style.cssText = `
         position: fixed;
         top: 20px;
         right: 20px;
-        background: #28a745;
+        background: ${color.bg};
         color: white;
-        padding: 15px 20px;
+        padding: 12px 20px;
         border-radius: 8px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         z-index: 1001;
         transform: translateX(100%);
         transition: transform 0.3s ease;
+        font-size: 14px;
+        max-width: 300px;
+        word-wrap: break-word;
     `;
-    feedback.innerHTML = `✅ ${productName} adicionado ao carrinho!`;
     
-    document.body.appendChild(feedback);
+    toast.innerHTML = `${color.icon} ${message}`;
+    document.body.appendChild(toast);
     
     // Animação de entrada
     setTimeout(() => {
-        feedback.style.transform = 'translateX(0)';
+        toast.style.transform = 'translateX(0)';
     }, 100);
     
-    // Remover após 3 segundos
+    // Remover após duração especificada
     setTimeout(() => {
-        feedback.style.transform = 'translateX(100%)';
+        toast.style.transform = 'translateX(100%)';
         setTimeout(() => {
-            document.body.removeChild(feedback);
+            if (document.body.contains(toast)) {
+                document.body.removeChild(toast);
+            }
         }, 300);
-    }, 3000);
+    }, duration);
+}
+
+// Mostrar feedback ao adicionar produto
+function showAddToCartFeedback(productName) {
+    showToast(`${productName} adicionado ao carrinho!`, 'success');
 }
 
 // Finalizar compra (simulação)
 function checkout() {
     if (cart.length === 0) {
-        alert('Seu carrinho está vazio!');
+        showToast('Seu carrinho está vazio!', 'warning');
         return;
     }
     
+    // Mostrar resumo do pedido no próprio carrinho
+    showCheckoutConfirmation();
+}
+
+// Mostrar confirmação de checkout no carrinho
+function showCheckoutConfirmation() {
+    const cartItems = document.getElementById('cart-items');
     const total = cartTotal.toLocaleString('pt-BR', { 
         style: 'currency', 
         currency: 'BRL' 
     });
     
     const itemsList = cart.map(item => 
-        `${item.quantity}x ${item.name} - R$ ${(item.price * item.quantity).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`
-    ).join('\\n');
+        `<div class="checkout-item">
+            <span>${item.quantity}x ${item.name}</span>
+            <span>R$ ${(item.price * item.quantity).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
+        </div>`
+    ).join('');
     
-    const confirmMessage = `Resumo do seu pedido:\\n\\n${itemsList}\\n\\nTotal: ${total}\\n\\nDeseja finalizar a compra?`;
+    const confirmationHTML = `
+        <div class="checkout-confirmation">
+            <h3>🛍️ Resumo do Pedido</h3>
+            <div class="checkout-items">
+                ${itemsList}
+            </div>
+            <div class="checkout-total">
+                <strong>Total: ${total}</strong>
+            </div>
+            <p class="checkout-question">Confirma a finalização da compra?</p>
+            <div class="checkout-buttons">
+                <button onclick="confirmCheckout()" class="btn btn-success">✅ Finalizar</button>
+                <button onclick="cancelCheckout()" class="btn btn-secondary">❌ Cancelar</button>
+            </div>
+        </div>
+    `;
     
-    if (confirm(confirmMessage)) {
-        alert('Pedido realizado com sucesso! ✅\\n\\nVocê receberá um e-mail com os detalhes da compra.');
-        
-        // Limpar carrinho
+    cartItems.innerHTML = confirmationHTML;
+}
+
+// Confirmar checkout
+function confirmCheckout() {
+    showToast('Pedido realizado com sucesso! 🎉', 'success');
+    
+    // Limpar carrinho após delay
+    setTimeout(() => {
         cart = [];
         localStorage.removeItem('cart');
         updateCartDisplay();
         updateCartCount();
-        toggleCart(); // Fechar modal
-    }
+    }, 1000);
+}
+
+// Cancelar checkout
+function cancelCheckout() {
+    updateCartDisplay();
+    showToast('Compra cancelada', 'info');
 }
 
 // Adicionar listener para o botão de checkout

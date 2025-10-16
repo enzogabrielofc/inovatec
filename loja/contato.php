@@ -35,12 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar_mensagem'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contato - InovaTech Store</title>
-    <link rel="stylesheet" href="style-modern.css">
+    <link rel="stylesheet" href="style-clean.css">
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>🔧 InovaTech Store</h1>
+            <h1>InovaTech Store</h1>
             <p class="slogan">Entre em contato conosco</p>
         </div>
     </header>
@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['enviar_mensagem'])) {
                 <li><a href="computadores.html">Computadores</a></li>
                 <li><a href="videogames.html">Videogames</a></li>
                 <li><a href="contato.html" class="active">Contato</a></li>
-                <li><a href="#" class="cart-btn" onclick="toggleCart()">🛒 Carrinho (<span id="cart-count">0</span>)</a></li>
+                <li><a href="#" class="cart-btn" onclick="toggleCart()"><i class="fas fa-shopping-cart"></i> Carrinho (<span id="cart-count">0</span>)</a></li>
             </ul>
         </div>
     </nav>

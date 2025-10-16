@@ -1,12 +1,6 @@
 // Quiz avançado com timer, progresso, navegação por teclado e tela de resultado
 (function() {
-  const quizData = [
-    { question: "Quem construiu a arca para sobreviver ao dilúvio?", options: ["Moisés", "Abraão", "Noé", "Davi"], correct: 2 },
-    { question: "Quem foi lançado na cova dos leões?", options: ["Daniel", "Jonas", "José", "Paulo"], correct: 0 },
-    { question: "Quem foi engolido por um grande peixe?", options: ["Pedro", "Jonas", "Paulo", "Elias"], correct: 1 },
-    { question: "Qual o primeiro livro da Bíblia?", options: ["Êxodo", "Salmos", "Gênesis", "Levítico"], correct: 2 },
-    { question: "Quem traiu Jesus por 30 moedas de prata?", options: ["Pedro", "Judas Iscariotes", "Tomé", "Pilatos"], correct: 1 }
-  ];
+  let quizData = []; // Será carregado da API
 
   // Elements
   const questionEl = document.getElementById('question');
@@ -25,14 +19,54 @@
   // State
   let current = 0;
   let score = 0;
-  const total = quizData.length;
+  let total = 0;
   let selectedIndex = null;
   let locked = false;
   let timerId = null;
   const TIME_PER_QUESTION = 20; // seconds
   let timeLeft = TIME_PER_QUESTION;
+  let isLoading = false;
 
-  function startQuiz() {
+  async function loadQuestions() {
+    if (isLoading) return;
+    
+    isLoading = true;
+    questionEl.textContent = 'Carregando perguntas...';
+    optionsEl.innerHTML = '';
+    
+    try {
+      const response = await fetch('api.php?count=5');
+      const data = await response.json();
+      
+      if (data.success && data.questions) {
+        quizData = data.questions;
+        total = quizData.length;
+        isLoading = false;
+        return true;
+      } else {
+        throw new Error(data.error || 'Erro ao carregar perguntas');
+      }
+    } catch (error) {
+      console.error('Erro ao carregar perguntas:', error);
+      // Fallback: usar perguntas hardcoded
+      quizData = [
+        { question: "Quem construiu a arca para sobreviver ao dilúvio?", options: ["Moisés", "Abraão", "Noé", "Davi"], correct: 2, reference: "Gênesis 6-9" },
+        { question: "Quem foi lançado na cova dos leões?", options: ["Daniel", "Jonas", "José", "Paulo"], correct: 0, reference: "Daniel 6" },
+        { question: "Quem foi engolido por um grande peixe?", options: ["Pedro", "Jonas", "Paulo", "Elias"], correct: 1, reference: "Jonas 1:17" },
+        { question: "Qual o primeiro livro da Bíblia?", options: ["Êxodo", "Salmos", "Gênesis", "Levítico"], correct: 2, reference: "Bíblia" },
+        { question: "Quem traiu Jesus por 30 moedas de prata?", options: ["Pedro", "Judas Iscariotes", "Tomé", "Pilatos"], correct: 1, reference: "Mateus 26:14-16" }
+      ];
+      total = quizData.length;
+      isLoading = false;
+      return true;
+    }
+  }
+
+  async function startQuiz() {
+    // Carrega novas perguntas da API
+    const loaded = await loadQuestions();
+    if (!loaded) return;
+    
     current = 0;
     score = 0;
     selectedIndex = null;
@@ -104,9 +138,21 @@
 
     if (index === correctIndex) {
       score++;
-      feedbackEl.textContent = 'Correto! ✅';
+      const reference = quizData[current].reference || '';
+      feedbackEl.innerHTML = `
+        <div class="feedback-correct">
+          <i class="fas fa-check-circle"></i> Correto!
+          ${reference ? `<br><small class="reference">Referência: ${reference}</small>` : ''}
+        </div>
+      `;
     } else {
-      feedbackEl.textContent = `Resposta correta: ${quizData[current].options[correctIndex]}`;
+      const reference = quizData[current].reference || '';
+      feedbackEl.innerHTML = `
+        <div class="feedback-wrong">
+          <i class="fas fa-times-circle"></i> Resposta correta: ${quizData[current].options[correctIndex]}
+          ${reference ? `<br><small class="reference">Referência: ${reference}</small>` : ''}
+        </div>
+      `;
     }
 
     clearTimer();
@@ -176,7 +222,13 @@
           opt.classList.add('disabled');
           if (i === correctIndex) opt.classList.add('correct');
         });
-        feedbackEl.textContent = 'Tempo esgotado ⏰';
+        const reference = quizData[current].reference || '';
+        feedbackEl.innerHTML = `
+          <div class="feedback-timeout">
+            <i class="fas fa-clock"></i> Tempo esgotado! Resposta: ${quizData[current].options[correctIndex]}
+            ${reference ? `<br><small class="reference">Referência: ${reference}</small>` : ''}
+          </div>
+        `;
         locked = true;
         nextBtn.disabled = false;
       }

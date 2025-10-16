@@ -131,6 +131,33 @@
   color: var(--quiz-muted);
   font-weight: 500;
   margin: 0.6rem 0 0.2rem 0;
+  border-radius: 8px;
+  padding: 10px 15px;
+}
+
+.feedback-correct {
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #10b981;
+}
+
+.feedback-wrong {
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #ef4444;
+}
+
+.feedback-timeout {
+  background: #fff7ed;
+  color: #c2410c;
+  border: 1px solid #f97316;
+}
+
+.reference {
+  color: var(--quiz-muted);
+  font-style: italic;
+  font-size: 0.85rem;
+  opacity: 0.8;
 }
 
 .quiz-controls {

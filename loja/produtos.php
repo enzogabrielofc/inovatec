@@ -62,13 +62,13 @@ function buildUrl($params = []) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produtos - InovaTech Store</title>
-    <link rel="stylesheet" href="style-modern.css">
+    <link rel="stylesheet" href="style-clean.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>🔧 InovaTech Store</h1>
+            <h1>InovaTech Store</h1>
             <p class="slogan">
                 <?php if (!empty($busca)): ?>
                     Resultados para "<?= htmlspecialchars($busca) ?>"
@@ -84,7 +84,7 @@ function buildUrl($params = []) {
                     echo htmlspecialchars($categoriaNome);
                     ?>
                 <?php else: ?>
-                    Todos os produtos
+                    Catálogo de Produtos
                 <?php endif; ?>
             </p>
         </div>
@@ -97,55 +97,12 @@ function buildUrl($params = []) {
                 <li><a href="produtos.php?categoria=1">Computadores</a></li>
                 <li><a href="produtos.php?categoria=2">Videogames</a></li>
                 <li><a href="contato.php">Contato</a></li>
-                <li><a href="#" class="cart-btn" onclick="toggleCart()">🛒 Carrinho (<span id="cart-count">0</span>)</a></li>
+                <li><a href="#" class="cart-btn" onclick="toggleCart()"><i class="fas fa-shopping-cart"></i> Carrinho (<span id="cart-count">0</span>)</a></li>
             </ul>
         </div>
     </nav>
 
     <main>
-        <!-- Filtros e Busca -->
-        <section class="filters-section">
-            <div class="container">
-                <form method="GET" class="filters-container">
-                    <div class="search-box">
-                        <i class="fas fa-search"></i>
-                        <input type="text" name="busca" placeholder="Buscar produtos..." value="<?= htmlspecialchars($busca) ?>">
-                    </div>
-
-                    <div class="filter-group">
-                        <label>Categoria</label>
-                        <select name="categoria" onchange="this.form.submit()">
-                            <option value="">Todas as categorias</option>
-                            <?php foreach ($categorias as $cat): ?>
-                                <option value="<?= $cat['id'] ?>" <?= $categoria == $cat['id'] ? 'selected' : '' ?>>
-                                    <?= htmlspecialchars($cat['nome']) ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </select>
-                    </div>
-
-                    <div class="filter-group">
-                        <label>Ordenar por</label>
-                        <select name="ordem" onchange="this.form.submit()">
-                            <option value="nome" <?= $ordem == 'nome' ? 'selected' : '' ?>>Nome</option>
-                            <option value="preco" <?= $ordem == 'preco' ? 'selected' : '' ?>>Menor preço</option>
-                            <option value="preco DESC" <?= $ordem == 'preco DESC' ? 'selected' : '' ?>>Maior preço</option>
-                            <option value="data_criacao DESC" <?= $ordem == 'data_criacao DESC' ? 'selected' : '' ?>>Mais novos</option>
-                        </select>
-                    </div>
-
-                    <button type="submit" class="btn">
-                        <i class="fas fa-filter"></i> Filtrar
-                    </button>
-
-                    <?php if (!empty($busca) || $categoria): ?>
-                        <a href="produtos.php" class="btn btn-outline">
-                            <i class="fas fa-times"></i> Limpar
-                        </a>
-                    <?php endif; ?>
-                </form>
-            </div>
-        </section>
 
         <!-- Resultados -->
         <section class="products">
@@ -216,17 +173,13 @@ function buildUrl($params = []) {
                                 <div class="product-actions">
                                     <?php if ($produto['estoque'] > 0): ?>
                                         <button class="btn" onclick="addToCart('<?= htmlspecialchars($produto['nome']) ?>', <?= $produto['preco_promocional'] ?: $produto['preco'] ?>, <?= $produto['id'] ?>)">
-                                            <i class="fas fa-shopping-cart"></i> Adicionar
+                                            <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
                                         </button>
                                     <?php else: ?>
                                         <button class="btn btn-disabled" disabled>
                                             <i class="fas fa-times"></i> Esgotado
                                         </button>
                                     <?php endif; ?>
-                                    
-                                    <button class="btn btn-outline" onclick="viewProduct(<?= $produto['id'] ?>)">
-                                        <i class="fas fa-eye"></i> Detalhes
-                                    </button>
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -301,12 +254,6 @@ function buildUrl($params = []) {
 
     <script src="script.js"></script>
     <script>
-        // Função para visualizar detalhes do produto
-        function viewProduct(id) {
-            // Por enquanto, abre em nova aba - depois pode ser modal
-            window.open(`produto.php?id=${id}`, '_blank');
-        }
-
         // Adicionar produto ao carrinho com ID
         function addToCart(productName, price, productId) {
             // Versão melhorada que inclui ID do produto
@@ -326,23 +273,7 @@ function buildUrl($params = []) {
             localStorage.setItem('cart', JSON.stringify(cart));
             updateCartDisplay();
             updateCartCount();
-            showToast(`${productName} adicionado ao carrinho!`);
-        }
-
-        // Função para mostrar toast
-        function showToast(message, type = 'success') {
-            const toast = document.createElement('div');
-            toast.className = `toast ${type} show`;
-            toast.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
-            
-            document.body.appendChild(toast);
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-                setTimeout(() => {
-                    document.body.removeChild(toast);
-                }, 300);
-            }, 3000);
+            showToast(`${productName} adicionado ao carrinho!`, 'success');
         }
     </script>
 </body>

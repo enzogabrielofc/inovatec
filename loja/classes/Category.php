@@ -21,13 +21,9 @@ class Category {
     /**
      * Construtor
      */
-    public function __construct($db = null) {
-        if ($db === null) {
-            $database = new Database();
-            $this->conn = $database->getConnection();
-        } else {
-            $this->conn = $db;
-        }
+    public function __construct() {
+        $database = new Database();
+        $this->conn = $database->getConnection();
     }
 
     /**
@@ -44,13 +40,7 @@ class Category {
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
-
-        $categories = [];
-        while ($row = $stmt->fetch()) {
-            $categories[] = $row;
-        }
-
-        return $categories;
+        return $stmt->fetchAll();
     }
 
     /**

@@ -1,12 +1,8 @@
 <?php
-/**
- * Configuração do Banco de Dados
- * InovaTech Store
- */
 
 class Database {
     private $host = 'localhost';
-    private $db_name = 'inovatech_store';
+    private $db_name = 'loja2.0';
     private $username = 'root';
     private $password = '';
     private $charset = 'utf8mb4';

@@ -438,6 +438,100 @@ class Product {
     }
 
     /**
+     * Produtos mais vendidos
+     */
+    public function getBestSellers($limit = 10) {
+        $query = "SELECT p.*, COUNT(ip.produto_id) as total_vendas,
+                  SUM(ip.quantidade) as quantidade_vendida,
+                  SUM(ip.subtotal) as total_faturamento
+                  FROM " . $this->table . " p
+                  INNER JOIN itens_pedido ip ON p.id = ip.produto_id
+                  INNER JOIN pedidos pe ON ip.pedido_id = pe.id
+                  WHERE pe.status_pedido IN ('confirmado', 'preparando', 'enviado', 'entregue')
+                  AND p.ativo = 1
+                  GROUP BY p.id, p.nome, p.preco
+                  ORDER BY quantidade_vendida DESC, total_vendas DESC
+                  LIMIT :limit";
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        $products = [];
+        while ($row = $stmt->fetch()) {
+            $row['preco_formatado'] = 'R$ ' . formatPrice($row['preco']);
+            $row['total_faturamento_formatado'] = 'R$ ' . formatPrice($row['total_faturamento']);
+            $products[] = $row;
+        }
+        
+        return $products;
+    }
+    
+    /**
+     * Estatísticas completas para dashboard
+     */
+    public function getDashboardStats() {
+        // Estatísticas básicas
+        $basicStats = $this->getStats();
+        
+        // Total de vendas
+        $salesQuery = "SELECT 
+                      COUNT(DISTINCT pe.id) as total_pedidos,
+                      SUM(pe.total) as total_faturamento,
+                      AVG(pe.total) as ticket_medio
+                      FROM pedidos pe 
+                      WHERE pe.status_pedido IN ('confirmado', 'preparando', 'enviado', 'entregue')";
+        
+        $stmt = $this->conn->prepare($salesQuery);
+        $stmt->execute();
+        $salesStats = $stmt->fetch();
+        
+        // Vendas do mês atual
+        $monthQuery = "SELECT 
+                       COUNT(DISTINCT pe.id) as vendas_mes,
+                       SUM(pe.total) as faturamento_mes
+                       FROM pedidos pe 
+                       WHERE pe.status_pedido IN ('confirmado', 'preparando', 'enviado', 'entregue')
+                       AND YEAR(pe.data_pedido) = YEAR(CURRENT_DATE)
+                       AND MONTH(pe.data_pedido) = MONTH(CURRENT_DATE)";
+        
+        $stmt = $this->conn->prepare($monthQuery);
+        $stmt->execute();
+        $monthStats = $stmt->fetch();
+        
+        return array_merge($basicStats, $salesStats ?: [], $monthStats ?: []);
+    }
+    
+    /**
+     * Relatório de vendas mensais (últimos 12 meses)
+     */
+    public function getMonthlySalesReport() {
+        $query = "SELECT 
+                  DATE_FORMAT(pe.data_pedido, '%Y-%m') as mes,
+                  DATE_FORMAT(pe.data_pedido, '%M %Y') as mes_nome,
+                  COUNT(pe.id) as total_pedidos,
+                  SUM(pe.total) as total_faturamento,
+                  AVG(pe.total) as ticket_medio
+                  FROM pedidos pe 
+                  WHERE pe.status_pedido IN ('confirmado', 'preparando', 'enviado', 'entregue')
+                  AND pe.data_pedido >= DATE_SUB(CURRENT_DATE, INTERVAL 12 MONTH)
+                  GROUP BY DATE_FORMAT(pe.data_pedido, '%Y-%m')
+                  ORDER BY mes DESC";
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        
+        $report = [];
+        while ($row = $stmt->fetch()) {
+            $row['total_faturamento_formatado'] = 'R$ ' . formatPrice($row['total_faturamento']);
+            $row['ticket_medio_formatado'] = 'R$ ' . formatPrice($row['ticket_medio']);
+            $report[] = $row;
+        }
+        
+        return $report;
+    }
+    
+    /**
      * Validar dados do produto
      */
     public function validate($data) {

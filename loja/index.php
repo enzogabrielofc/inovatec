@@ -28,14 +28,14 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InovaTech Store - Sua Loja de Tecnologia</title>
-    <link rel="stylesheet" href="style-modern.css">
+    <link rel="stylesheet" href="style-clean.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>🔧 InovaTech Store</h1>
-            <p class="slogan">Tecnologia que transforma seu mundo</p>
+            <h1>InovaTech Store</h1>
+            <p class="slogan">Sua loja de tecnologia online</p>
         </div>
     </header>
 
@@ -47,7 +47,8 @@ try {
                 <li><a href="produtos.php?categoria=2">Videogames</a></li>
                 <li><a href="produtos.php">Todos os Produtos</a></li>
                 <li><a href="contato.php">Contato</a></li>
-                <li><a href="#" class="cart-btn" onclick="toggleCart()">🛒 Carrinho (<span id="cart-count">0</span>)</a></li>
+                <li><a href="#" class="cart-btn" onclick="toggleCart()"><i class="fas fa-shopping-cart"></i> Carrinho (<span id="cart-count">0</span>)</a></li>
+                <li><a href="admin-dashboard.php" class="login-btn" title="Área Administrativa"><i class="fas fa-user-shield"></i> Admin</a></li>
             </ul>
         </div>
     </nav>
