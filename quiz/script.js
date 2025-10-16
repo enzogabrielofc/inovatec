@@ -31,14 +31,19 @@
     if (isLoading) return;
     
     isLoading = true;
-    questionEl.textContent = 'Carregando perguntas...';
-    optionsEl.innerHTML = '';
+    questionEl.innerHTML = '⏳ Carregando novas perguntas bíblicas...';
+    optionsEl.innerHTML = '<div style="text-align: center; padding: 20px; color: #6c757d;"><i class="fas fa-spinner fa-spin"></i> Aguarde...</div>';
     
     try {
       const response = await fetch('api.php?count=5');
+      
+      if (!response.ok) {
+        throw new Error(`HTTP Error: ${response.status}`);
+      }
       const data = await response.json();
       
       if (data.success && data.questions) {
+        console.log('API Response:', data);
         quizData = data.questions;
         total = quizData.length;
         isLoading = false;
