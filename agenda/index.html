@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda de Eventos - Inovatec</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-calendar-alt"></i> Agenda de Eventos</h1>
+            <button class="btn-novo-evento" onclick="abrirModal()">
+                <i class="fas fa-plus"></i> Novo Evento
+            </button>
+        </header>
+
+        <div class="filtros">
+            <div class="filtro-data">
+                <label for="filtroData">Filtrar por data:</label>
+                <input type="date" id="filtroData" onchange="filtrarEventos()">
+            </div>
+            <div class="filtro-categoria">
+                <label for="filtroCategoria">Categoria:</label>
+                <select id="filtroCategoria" onchange="filtrarEventos()">
+                    <option value="">Todas as categorias</option>
+                    <option value="trabalho">Trabalho</option>
+                    <option value="pessoal">Pessoal</option>
+                    <option value="reuniao">Reunião</option>
+                    <option value="evento">Evento</option>
+                    <option value="lembrete">Lembrete</option>
+                </select>
+            </div>
+            <button class="btn-limpar-filtros" onclick="limparFiltros()">
+                <i class="fas fa-times"></i> Limpar Filtros
+            </button>
+        </div>
+
+        <div class="calendario-container">
+            <div class="calendario-header">
+                <button class="btn-nav" onclick="navegarMes(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <h2 id="mesAno"></h2>
+                <button class="btn-nav" onclick="navegarMes(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="calendario" id="calendario"></div>
+        </div>
+
+        <div class="eventos-lista">
+            <h3>Próximos Eventos</h3>
+            <div id="listaEventos"></div>
+        </div>
+    </div>
+
+    <!-- Modal para adicionar/editar eventos -->
+    <div id="modalEvento" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitulo">Novo Evento</h2>
+                <span class="close" onclick="fecharModal()">&times;</span>
+            </div>
+            <form id="formEvento" onsubmit="salvarEvento(event)">
+                <div class="form-group">
+                    <label for="tituloEvento">Título:</label>
+                    <input type="text" id="tituloEvento" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="descricaoEvento">Descrição:</label>
+                    <textarea id="descricaoEvento" rows="3"></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="dataEvento">Data:</label>
+                        <input type="date" id="dataEvento" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="horaEvento">Hora:</label>
+                        <input type="time" id="horaEvento" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="categoriaEvento">Categoria:</label>
+                    <select id="categoriaEvento" required>
+                        <option value="">Selecione uma categoria</option>
+                        <option value="trabalho">Trabalho</option>
+                        <option value="pessoal">Pessoal</option>
+                        <option value="reuniao">Reunião</option>
+                        <option value="evento">Evento</option>
+                        <option value="lembrete">Lembrete</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="localEvento">Local:</label>
+                    <input type="text" id="localEvento">
+                </div>
+                
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="lembrarEvento">
+                        Lembrar 15 minutos antes
+                    </label>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-cancelar" onclick="fecharModal()">Cancelar</button>
+                    <button type="submit" class="btn-salvar">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de confirmação para excluir -->
+    <div id="modalConfirmacao" class="modal">
+        <div class="modal-content modal-pequeno">
+            <div class="modal-header">
+                <h2>Confirmar Exclusão</h2>
+                <span class="close" onclick="fecharModalConfirmacao()">&times;</span>
+            </div>
+            <p>Tem certeza que deseja excluir este evento?</p>
+            <div class="form-actions">
+                <button type="button" class="btn-cancelar" onclick="fecharModalConfirmacao()">Cancelar</button>
+                <button type="button" class="btn-excluir" onclick="confirmarExclusao()">Excluir</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="agenda-eventos.js"></script>
+</body>
+</html>

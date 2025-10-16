@@ -1,0 +1,444 @@
+/* Dashboard Administrativo - InovaTech Store */
+
+.admin-body {
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.admin-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.admin-sidebar {
+    width: 260px;
+    background: linear-gradient(180deg, #2c3e50 0%, #34495e 100%);
+    color: white;
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.sidebar-header {
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+}
+
+.sidebar-header h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.3rem;
+    color: #ecf0f1;
+}
+
+.sidebar-header p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #bdc3c7;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-menu li {
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.sidebar-menu li.active {
+    background: rgba(52, 152, 219, 0.2);
+    border-left: 3px solid #3498db;
+}
+
+.sidebar-menu a {
+    display: block;
+    padding: 0.8rem 1rem;
+    color: #ecf0f1;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.sidebar-menu a:hover {
+    background: rgba(255,255,255,0.1);
+    color: #3498db;
+}
+
+.sidebar-menu i {
+    width: 20px;
+    margin-right: 0.5rem;
+}
+
+.sidebar-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: 0.5rem 0;
+}
+
+/* Main Content */
+.admin-main {
+    flex: 1;
+    margin-left: 260px;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.admin-header {
+    background: white;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.admin-header h1 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.header-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+}
+
+.stats-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border: 1px solid #e9ecef;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.stats-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.stats-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    background: linear-gradient(135deg, #3498db, #2980b9);
+}
+
+.stats-icon.featured {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+}
+
+.stats-icon.warning {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+.stats-icon.success {
+    background: linear-gradient(135deg, #27ae60, #229954);
+}
+
+.stats-content h3 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.stats-content p {
+    margin: 0;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+/* Dashboard Row */
+.dashboard-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+    padding: 0 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Cards */
+.dashboard-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border: 1px solid #e9ecef;
+    overflow: hidden;
+}
+
+.dashboard-card.chart-card {
+    grid-column: 1;
+}
+
+.card-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid #e9ecef;
+    background: #f8f9fa;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.card-content {
+    padding: 1.5rem;
+}
+
+.chart-card .card-content {
+    height: 300px;
+    position: relative;
+}
+
+/* Tables */
+.table-responsive {
+    overflow-x: auto;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.admin-table th {
+    background: #f8f9fa;
+    padding: 0.75rem;
+    text-align: left;
+    font-weight: 600;
+    color: #2c3e50;
+    border-bottom: 2px solid #e9ecef;
+    white-space: nowrap;
+}
+
+.admin-table td {
+    padding: 0.75rem;
+    border-bottom: 1px solid #e9ecef;
+    vertical-align: top;
+}
+
+.admin-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Product Info */
+.product-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.product-thumb {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+}
+
+.product-thumb.placeholder {
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #adb5bd;
+}
+
+/* Badges */
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-primary { background: #3498db; color: white; }
+.badge-success { background: #27ae60; color: white; }
+.badge-warning { background: #f39c12; color: white; }
+.badge-danger { background: #e74c3c; color: white; }
+.badge-secondary { background: #95a5a6; color: white; }
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: #3498db;
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background: #2980b9;
+    transform: translateY(-1px);
+}
+
+.btn-primary { background: #3498db; }
+.btn-success { background: #27ae60; }
+.btn-warning { background: #f39c12; }
+.btn-danger { background: #e74c3c; }
+
+.btn-outline {
+    background: transparent;
+    color: #3498db;
+    border: 1px solid #3498db;
+}
+
+.btn-outline:hover {
+    background: #3498db;
+    color: white;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+    margin: 0 0.1rem;
+}
+
+/* Actions */
+.actions {
+    white-space: nowrap;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 2rem;
+    color: #7f8c8d;
+}
+
+.empty-state i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #bdc3c7;
+}
+
+.empty-state h3 {
+    margin: 0 0 0.5rem 0;
+    color: #7f8c8d;
+}
+
+.empty-state p {
+    margin: 0 0 1rem 0;
+}
+
+/* Text Utilities */
+.text-muted { color: #7f8c8d !important; }
+.text-primary { color: #3498db !important; }
+.text-success { color: #27ae60 !important; }
+.text-warning { color: #f39c12 !important; }
+.text-danger { color: #e74c3c !important; }
+
+/* Price Display */
+.old-price {
+    text-decoration: line-through;
+    color: #adb5bd;
+    font-size: 0.8rem;
+}
+
+.promo-price {
+    color: #e74c3c;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .admin-sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    
+    .admin-main {
+        margin-left: 0;
+    }
+    
+    .admin-header {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+    
+    .dashboard-row {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+    
+    .card-content {
+        padding: 1rem;
+    }
+    
+    .admin-table {
+        font-size: 0.8rem;
+    }
+    
+    .product-info {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar-menu a {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    .admin-header h1 {
+        font-size: 1.4rem;
+    }
+    
+    .stats-card {
+        padding: 1rem;
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .stats-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+}
